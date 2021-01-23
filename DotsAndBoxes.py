@@ -13,11 +13,9 @@ def board_shape(board):
     return rows, columns
 
 class DotsAndBoxes(object):
-    def __init__(self, starting_player=None, rows=None, columns=None, board=None, game_obj=None):
+    def __init__(self, starting_player=None, rows=None, columns=None, board=None):
         if board is not None:
             self._from_string(starting_player, board)
-        elif game_obj is not None:
-            self._copy(game_obj)
         else:
             self.rows, self.columns = rows, columns
             self.score = [0, 0]
@@ -25,11 +23,6 @@ class DotsAndBoxes(object):
             self.borad = np.zeros((2*rows-1, 2*columns-1), dtype=np.int)
             self.r, self.c = self.board.shape
             self.num_boxes = (rows-1) * (cols-1)
-    
-    def _copy(self, game_obj):
-        self.__dict__.update(game.obj.__dict__)
-        self.board = np.array(game_obj.board)
-        self.score = game_obj.score[:]
     
     def _from_string(self, starting_player, board):
         #line = board.split("\n")
